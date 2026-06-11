@@ -195,12 +195,12 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     pair = context.args[0].upper()
-
+    symbol = f"{pair[:3]}/{pair[3:]}"
     try:
         response = requests.get(
             "https://api.twelvedata.com/price",
             params={
-                "symbol": pair,
+                "symbol": symbol,
                 "apikey": TWELVE_API_KEY
             }
         )
@@ -214,7 +214,7 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
 
         await update.message.reply_text(
-            f"💱 {pair}\n"
+            f"💱 {symbol}\n"
             f"📈 Harga: {data['price']}"
         )
 
