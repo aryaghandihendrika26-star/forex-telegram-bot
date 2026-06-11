@@ -187,6 +187,41 @@ async def kalkulator_command(update: Update, context: ContextTypes.DEFAULT_TYPE)
 # ═════════════════════════════════════════════════════════════════════════════
 # 4. KIRIM SINYAL TRADING (Admin Only)
 # ═════════════════════════════════════════════════════════════════════════════
+async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if len(context.args) != 1:
+        await update.message.reply_text(
+            "Gunakan:\n/price EURUSD"
+        )
+        return
+
+    pair = context.args[0].upper()
+
+    try:
+        response = requests.get(
+            "https://api.twelvedata.com/price",
+            params={
+                "symbol": pair,
+                "apikey": TWELVE_API_KEY
+            }
+        )
+
+        data = response.json()
+
+        if "price" not in data:
+            await update.message.reply_text(
+                "Pair tidak ditemukan."
+            )
+            return
+
+        await update.message.reply_text(
+            f"💱 {pair}\n"
+            f"📈 Harga: {data['price']}"
+        )
+
+    except Exception as e:
+        await update.message.reply_text(
+            f"Error: {e}"
+        )
 SINYAL_USAGE = (
     "📡 *Format Sinyal Trading*\n\n"
     "`/sinyal PAIR ACTION ENTRY TP SL`\n\n"
@@ -281,6 +316,7 @@ def main():
     app.add_handler(CommandHandler(["start", "help"], help_command))
     app.add_handler(CommandHandler("sesi",        sesi_command))
     app.add_handler(CommandHandler("kalkulator",  kalkulator_command))
+    app.add_handler(Commandhandler("price", price_command))
     app.add_handler(CommandHandler("sinyal",      sinyal_command))
     app.add_handler(
         MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, welcome_member)
