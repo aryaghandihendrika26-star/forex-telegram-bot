@@ -113,7 +113,7 @@ async def sesi_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
     lines.append(f"\n🗓 _{now.strftime('%H:%M WIB, %d %b %Y')}_")
-    await update.message.reply_text("\n".join(lines), parse_mode="MarkdownV2")
+    await update.message.reply_text("\n".join(lines))
 
 
 # ═════════════════════════════════════════════════════════════════════════════
