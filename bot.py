@@ -359,7 +359,7 @@ def main():
     app.add_handler(CommandHandler("sesi",        sesi_command))
     app.add_handler(CommandHandler("kalkulator",  kalkulator_command))
     app.add_handler(CommandHandler("price", price_command))
-    app.add_handler(Commandhandler("market", market_command))
+    app.add_handler(CommandHandler("market", market_command))
     app.add_handler(CommandHandler("sinyal",      sinyal_command))
     app.add_handler(
         MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, welcome_member)
