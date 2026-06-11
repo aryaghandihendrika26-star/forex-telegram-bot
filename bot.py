@@ -173,7 +173,7 @@ async def kalkulator_command(update: Update, context: ContextTypes.DEFAULT_TYPE)
             f"   R:R 1:2   → \\${e(f'{reward_2r:,.2f}')}\n\n"
             f"_\\*Berlaku untuk pair mayor \\(pip value \\$10/lot\\)_"
         )
-        await update.message.reply_text(result, parse_mode="MarkdownV2")
+        await update.message.reply_text(result)
 
     except (ValueError, ZeroDivisionError):
         await update.message.reply_text(
