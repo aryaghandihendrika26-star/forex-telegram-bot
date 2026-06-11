@@ -37,7 +37,7 @@ TWELVE_API_KEY = "464497cc298e4dd9b925d8577568976e"
 # Telegram User ID admin yang boleh kirim sinyal.
 # Kosongkan [] agar semua bisa kirim sinyal (tidak disarankan untuk grup publik).
 # Contoh: ADMIN_IDS = [123456789, 987654321]
-ADMIN_IDS = []
+ADMIN_IDS = [7304337927]
 
 WIB = pytz.timezone("Asia/Jakarta")
 
