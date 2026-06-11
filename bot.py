@@ -284,30 +284,27 @@ async def sinyal_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # 5. HELP / START
 # ═════════════════════════════════════════════════════════════════════════════
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Tampilkan daftar perintah yang tersedia."""
     text = (
-        "🤖 *Forex Trading Bot*\n\n"
-        "📌 *Perintah tersedia:*\n\n"
-        "• /sinyal `PAIR ACTION ENTRY TP SL`\n"
-        "  _→ Kirim sinyal trading \\(admin\\)_\n\n"
-        "• /sesi\n"
-        "  _→ Jadwal sesi market forex \\(WIB\\)_\n\n"
-        "• /kalkulator `balance risk% sl_pip`\n"
-        "  _→ Hitung ukuran lot & target profit_\n\n"
-        "• /help\n"
-        "  _→ Tampilkan menu ini_\n\n"
-        "━━━━━━━━━━━━━━━━━━━━━\n"
-      "• /price EURUSD\n"
-"  → Harga forex real-time\n\n"
+        "🤖 Forex Trading Bot\n\n"
+        "📌 Perintah tersedia:\n\n"
 
-"• /market\n"
-"  → Status market forex\n\n"
-        "💡 *Contoh kalkulator:*\n"
-        "`/kalkulator 1000 2 50`\n\n"
-        "💡 *Contoh sinyal:*\n"
-        "`/sinyal EURUSD BUY 1\\.0850 1\\.0900 1\\.0800`"
+        "/price EURUSD\n"
+        "→ Menampilkan harga forex real-time\n\n"
+
+        "/market\n"
+        "→ Menampilkan status market forex\n\n"
+
+        "/sesi\n"
+        "→ Jadwal sesi market forex\n\n"
+
+        "/kalkulator 1000 2 50\n"
+        "→ Menghitung ukuran lot\n\n"
+
+        "/sinyal EURUSD BUY 1.0850 1.0900 1.0800\n"
+        "→ Mengirim sinyal trading\n"
     )
-    await update.message.reply_text(text, parse_mode="MarkdownV2")
+
+    await update.message.reply_text(text)
 
 
 # ═════════════════════════════════════════════════════════════════════════════
