@@ -195,14 +195,9 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     pair = context.args[0].upper()
-
     symbol = f"{pair[:3]}/{pair[3:]}"
 
     try:
-        await update.message.reply_text(
-            f"DEBUG:\nPair = {pair}\nSymbol = {symbol}"
-        )
-
         response = requests.get(
             "https://api.twelvedata.com/price",
             params={
@@ -213,13 +208,20 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         data = response.json()
 
+        if "price" not in data:
+            await update.message.reply_text(
+                f"Error dari Twelve Data:\n{data}"
+            )
+            return
+
         await update.message.reply_text(
-            f"Response API:\n{data}"
+            f"💱 Pair: {symbol}\n"
+            f"📈 Harga: {data['price']}"
         )
 
     except Exception as e:
         await update.message.reply_text(
-            f"Error: {e}"
+            f"❌ Error: {e}"
         )
 SINYAL_USAGE = (
     "📡 *Format Sinyal Trading*\n\n"
