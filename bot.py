@@ -13,6 +13,7 @@ Fitur:
 import logging
 from datetime import datetime
 import pytz
+import requests
 from telegram import Update
 from telegram.ext import (
     Application,
