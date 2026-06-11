@@ -297,6 +297,11 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "• /help\n"
         "  _→ Tampilkan menu ini_\n\n"
         "━━━━━━━━━━━━━━━━━━━━━\n"
+      "• /price EURUSD\n"
+"  → Harga forex real-time\n\n"
+
+"• /market\n"
+"  → Status market forex\n\n"
         "💡 *Contoh kalkulator:*\n"
         "`/kalkulator 1000 2 50`\n\n"
         "💡 *Contoh sinyal:*\n"
@@ -308,6 +313,42 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # ═════════════════════════════════════════════════════════════════════════════
 # MAIN — Jalankan Bot
 # ═════════════════════════════════════════════════════════════════════════════
+async def market_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    now = datetime.now(WIB)
+    hour = now.hour
+
+    market_status = "📊 *Status Market Forex*\n\n"
+
+    # Sydney
+    if 5 <= hour < 14:
+        market_status += "🇦🇺 Sydney : 🟢 BUKA\n"
+    else:
+        market_status += "🇦🇺 Sydney : 🔴 TUTUP\n"
+
+    # Tokyo
+    if 7 <= hour < 16:
+        market_status += "🇯🇵 Tokyo : 🟢 BUKA\n"
+    else:
+        market_status += "🇯🇵 Tokyo : 🔴 TUTUP\n"
+
+    # London
+    if 14 <= hour < 23:
+        market_status += "🇬🇧 London : 🟢 BUKA\n"
+    else:
+        market_status += "🇬🇧 London : 🔴 TUTUP\n"
+
+    # New York
+    if hour >= 19 or hour < 4:
+        market_status += "🇺🇸 New York : 🟢 BUKA\n"
+    else:
+        market_status += "🇺🇸 New York : 🔴 TUTUP\n"
+
+    market_status += f"\n🕒 WIB: {now.strftime('%H:%M')}"
+
+    await update.message.reply_text(
+        market_status,
+        parse_mode="Markdown"
+    )
 def main():
     print("🚀 Bot Forex Trading sedang berjalan...")
 
@@ -318,6 +359,7 @@ def main():
     app.add_handler(CommandHandler("sesi",        sesi_command))
     app.add_handler(CommandHandler("kalkulator",  kalkulator_command))
     app.add_handler(CommandHandler("price", price_command))
+    app.add_handler(Commandhandler("market", market_command))
     app.add_handler(CommandHandler("sinyal",      sinyal_command))
     app.add_handler(
         MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, welcome_member)
