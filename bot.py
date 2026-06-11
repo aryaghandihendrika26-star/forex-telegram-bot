@@ -209,7 +209,7 @@ async def price_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         if "price" not in data:
             await update.message.reply_text(
-                "Pair tidak ditemukan."
+                f"Error dari Twelve Data:\n{data}"
             )
             return
 
