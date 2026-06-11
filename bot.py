@@ -31,6 +31,7 @@ logger = logging.getLogger(__name__)
 
 # ── Konfigurasi ───────────────────────────────────────────────────────────────
 TOKEN = "8829387199:AAHksb4qzubqEVL8dUPZVG_3eXwcdlsn75c"
+TWELVE_API_KEY = "464497cc298e4dd9b925d8577568976e"
 
 # Telegram User ID admin yang boleh kirim sinyal.
 # Kosongkan [] agar semua bisa kirim sinyal (tidak disarankan untuk grup publik).
